@@ -11,7 +11,14 @@
     flake-parts,
     ...
   }:
-    flake-parts.lib.mkFlake {inherit inputs;} {
+  # FIXME: Can remove this part until `flake-parts` if you are using this repo as a nix template
+    {
+      templates.default = {
+        description = "Basic Rust CLI project with no dependencies";
+        path = ./.;
+      };
+    }
+    // flake-parts.lib.mkFlake {inherit inputs;} {
       systems = [
         "x86_64-linux" # 64bit Intel/AMD Linux
         "x86_64-darwin" # 64bit Intel Darwin (macOS)
